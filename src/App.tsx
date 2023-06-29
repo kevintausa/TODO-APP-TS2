@@ -4,7 +4,7 @@ import { Header } from './components/Header'
 import { Footer } from './components/Footer';
 import './App.css'
 import { Search } from './components/Search';
-import { Todo } from '../src/types'
+
 const mockTodos = [
   {
     id: '0',
@@ -34,9 +34,10 @@ const App = (): JSX.Element => {
     setTodos(newTodos)
   }
   const handelComplete = (id: string): void => {
-    const index = todos.findIndex(todo => todo.id === id)
+    var index = todos.findIndex(todo => todo.id === id)
+    const idComplete = todos[index].id
     const newTodos = todos.map(todo => {
-      if (Number(todo.id) == index) {
+      if (todo.id == idComplete) {
         todo.completed = !todo.completed
         return {
           ...todo
@@ -45,11 +46,12 @@ const App = (): JSX.Element => {
       return todo
 
     })
+    console.log(newTodos)
     setTodos(newTodos)
   }
   const showTodo = (inTodo: string) => {
     const newTodo = {
-      id: String(todos.length),
+      id: crypto.randomUUID(),
       title: inTodo,
       completed: false
     }

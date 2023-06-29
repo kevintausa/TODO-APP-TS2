@@ -1,24 +1,27 @@
-import {useState} from 'react'
+import { useState } from 'react'
 interface Props {
-    showTodo:(inTodo:string)=> void
+    showTodo: (inTodo: string) => void
 }
 
-export const Search = ({showTodo}:Props)=>{
+export const Search = ({ showTodo }: Props) => {
     const [newTodo, setNewTodo] = useState('');
-    const handleInput = (e:any)=>{
+    const handleInput = (e: any) => {
         var title = e.target.value
         setNewTodo(title)
     }
-    const handleSubmit = ()=>{
-        showTodo(newTodo)
+    const handleSubmit = () => {
         event?.preventDefault()
-        setNewTodo('')
+        if (newTodo!== '') {
+            showTodo(newTodo)
+            setNewTodo('')
+        }
+
     }
-    return(
+    return (
         <form onSubmit={handleSubmit}>
-            <input onChange={handleInput} type="text" placeholder="¿ Que hay pa hacer ?"  className="new-todo" value={newTodo} />
+            <input onChange={handleInput} type="text" placeholder="¿ Que hay pa hacer ?" className="new-todo" value={newTodo} />
         </form>
-        
+
     )
 
 }
